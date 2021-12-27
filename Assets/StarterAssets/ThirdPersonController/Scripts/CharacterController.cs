@@ -12,10 +12,10 @@ using UnityEngine.InputSystem;
 
     public class CharacterController : MonoBehaviour
     {        
-        private Animator _animator;
-        private CharacterController _controller;
-        private PlayerInputActions _playerControls;        
+        public Animator _animator;
         public Rigidbody rb;
+        private CharacterController _controller;
+        private PlayerInputActions _playerControls;          
 
         private InputAction move;
         private InputAction jump;
@@ -23,7 +23,7 @@ using UnityEngine.InputSystem;
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
-        public Vector2 moveDirection = Vector2.zero;
+        public Vector2 moveDirection;
 
         [Space(10)]
         [Tooltip("The height the player can jump")]
@@ -52,23 +52,18 @@ using UnityEngine.InputSystem;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
 
+        //Animation IDs
+        private int _animIDMove;
+
         //timeout deltatime
 
          private float _jumpTimeoutDelta;
-        private float _fallTimeoutDelta;
-
-        //animation IDs
-
-         private int _animIDSpeed;
-        private int _animIDGrounded;
-        private int _animIDJump;
-        private int _animIDFreeFall; 
-
-        private bool _hasAnimator;
+        private float _fallTimeoutDelta;        
 
         private void Awake()
         {
-            _playerControls = new PlayerInputActions();
+            _playerControls = new PlayerInputActions();            
+            AssignAnimationIDs();            
         }
 
         private void OnEnable()
@@ -80,6 +75,7 @@ using UnityEngine.InputSystem;
             jump = _playerControls.Player.Jump;
             jump.performed+= DoJump;
             jump.Enable();
+            
         }
         private void OnDisable()
         {
@@ -89,8 +85,33 @@ using UnityEngine.InputSystem;
 
         private void Update()
         {
-            moveDirection = move.ReadValue<Vector2>();
             Move();
+                       
+        }
+
+        #region Character Movement
+
+        private void Move()
+        {
+            moveDirection = move.ReadValue<Vector2>();
+            _speed = MoveSpeed;
+            var newVector= new Vector2(moveDirection.x * _speed, moveDirection.y * _speed);
+            
+            CheckCharacterFlip();
+
+            //move the player              
+            rb.velocity = newVector;
+            _animator.SetBool(_animIDMove, (moveDirection.x != 0));
+        }
+        #endregion
+
+        private void CheckCharacterFlip()
+        {
+            var charDir = transform.localScale;
+            if (moveDirection.x > 0) charDir.x = Mathf.Abs(charDir.x);
+            if (moveDirection.x < 0) charDir.x = -1 * Mathf.Abs(charDir.x);
+            
+            transform.localScale = charDir;
         }
 
         private void DoJump(InputAction.CallbackContext obj)
@@ -98,36 +119,10 @@ using UnityEngine.InputSystem;
             Debug.Log("Jumped!");
         }
 
-        //private void Start()
-        //{
-        //    _hasAnimator = TryGetComponent(out _animator);
-        //    _controller = GetComponent<CharacterController>();
-        //    _input = GetComponent<PlayerInput>();
-
-        //    AssignAnimationIDs();
-
-        //    //reset our timeouts on start
-        //    _jumpTimeoutDelta = JumpTimeout;
-        //    _fallTimeoutDelta = FallTimeout;
-        //}
-
-        //private void Update()
-        //{
-        //    _hasAnimator = TryGetComponent(out _animator);
-
-        //    JumpAndGravity();
-        //    GroundedCheck();
-        //    Move();
-        //    Actions();
-        //}
-
-        //private void AssignAnimationIDs()
-        //{
-        //    _animIDSpeed = Animator.StringToHash("Speed");
-        //    _animIDGrounded = Animator.StringToHash("Grounded");
-        //    _animIDJump = Animator.StringToHash("Jump");
-        //    _animIDFreeFall = Animator.StringToHash("FreeFall");            
-        //}
+        private void AssignAnimationIDs()
+        {
+            _animIDMove = Animator.StringToHash("IsRunning");
+        }
 
         //private void GroundedCheck()
         //{
@@ -143,17 +138,7 @@ using UnityEngine.InputSystem;
         //}
 
 
-        #region Character Movement
-
-        private void Move()
-        {
-            _speed = MoveSpeed;
-
-            //move the player              
-            rb.velocity = new Vector2(moveDirection.x * _speed , moveDirection.y * _speed);
-            
-        }
-        #endregion
+        
 
         //#region Actions of Player
 
