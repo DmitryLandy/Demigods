@@ -5,9 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
-    public void PlayGame()
-    {
-        //Gets the next scene (game) in the scene queue
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
+    //Gets the next scene (game) in the scene queue
+    public void PlayGame() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+    public void QuitGame() => Application.Quit();
 }
