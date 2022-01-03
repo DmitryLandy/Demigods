@@ -734,6 +734,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5512325765843670348, guid: 7e92d6e6dd82caf4e9635c9a2c34e515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5512325765843670348, guid: 7e92d6e6dd82caf4e9635c9a2c34e515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5512325765843670348, guid: 7e92d6e6dd82caf4e9635c9a2c34e515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1115282382}
+    - target: {fileID: 5512325765843670348, guid: 7e92d6e6dd82caf4e9635c9a2c34e515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5512325765843670348, guid: 7e92d6e6dd82caf4e9635c9a2c34e515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5512325765843670348, guid: 7e92d6e6dd82caf4e9635c9a2c34e515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5512325765843670348, guid: 7e92d6e6dd82caf4e9635c9a2c34e515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5512325767376002562, guid: 7e92d6e6dd82caf4e9635c9a2c34e515, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -824,6 +852,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e92d6e6dd82caf4e9635c9a2c34e515, type: 3}
+--- !u!114 &1115282382 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5512325767376002563, guid: 7e92d6e6dd82caf4e9635c9a2c34e515, type: 3}
+  m_PrefabInstance: {fileID: 1115282381}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73145313192953044bbf48072384bfe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1221041499
 PrefabInstance:
   m_ObjectHideFlags: 0

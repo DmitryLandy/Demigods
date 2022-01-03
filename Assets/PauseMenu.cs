@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -40,6 +41,13 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(!isGamePaused);
         isGamePaused = !isGamePaused;
         Time.timeScale = isGamePaused ? 0f : 1f;
+    }
+
+    public void GoToMainMenu()
+    {
+        //Gets the next scene (game) in the scene queue
+        SceneManager.LoadScene(0);
+        isGamePaused = false;
     }
 
 }
