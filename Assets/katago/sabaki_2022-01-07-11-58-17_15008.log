@@ -1,0 +1,19 @@
+[2022-01-07 11:57:52.717] <Katago>    (in) : name
+[2022-01-07 11:57:52.720] <Katago>    (in) : version
+[2022-01-07 11:57:52.720] <Katago>    (in) : protocol_version
+[2022-01-07 11:57:52.721] <Katago>    (in) : list_commands
+[2022-01-07 11:57:52.722] <Katago>    (in) : ./katago.exe gtp -model g170-b30c320x2-s4824661760-d1229536699.bin.gz
+[2022-01-07 11:57:52.723] <Katago>  (meta) : Engine Started
+[2022-01-07 11:57:52.739] <Katago>  (meta) : Connection Failed
+[2022-01-07 11:57:52.740] <Katago>  (meta) : Connection Failed
+[2022-01-07 11:57:52.740] <Katago>  (meta) : Connection Failed
+[2022-01-07 11:57:52.741] <Katago>  (meta) : Connection Failed
+[2022-01-07 11:57:52.741] <Katago>  (meta) : Connection Failed
+[2022-01-07 11:57:58.134] <Katago>    (in) : quit
+[2022-01-07 11:57:59.180] <Leela Zero>    (in) : quit
+[2022-01-07 11:58:03.382] <Katago>    (in) : protocol_version
+[2022-01-07 11:58:03.383] <Katago>    (in) : komi 6.5
+[2022-01-07 11:58:06.269] <Leela Zero>    (in) : protocol_version
+[2022-01-07 11:58:07.059] <Leela Zero>    (in) : protocol_version
+[2022-01-07 11:58:38.157] <Katago>    (in) : protocol_version
+[2022-01-07 11:58:42.295] <Katago>    (in) : quit
