@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ public class GobanTestScript : MonoBehaviour
     private static StringBuilder errorOutput = new StringBuilder();
     public Process process;
 
-    public void GenMove()
+    private void StartKatagoProcess()
     {
         using (Process process = new Process())
         {
@@ -26,15 +27,16 @@ public class GobanTestScript : MonoBehaviour
             startInfo.RedirectStandardOutput = true;
             startInfo.RedirectStandardInput = true;
             startInfo.RedirectStandardError = true;
-            // startInfo.CreateNoWindow = true;
+            startInfo.CreateNoWindow = true;
 
             process.StartInfo = startInfo;
 
             process.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
             {
-                // Prepend line numbers to each line of the output.
+                var pattern = "^= ([A-S]([1-9]|1[1-9]))$";
                 if (!String.IsNullOrEmpty(e.Data))
                 {
+                    //if (Regex.IsMatch(e.Data, pattern)) coordinateText.text = e.Data; // CAUSES HUNG PROCESS! needs async?
                     UnityEngine.Debug.Log("\n[" + ++lineCount + "]: " + e.Data);
                 }
             });
@@ -47,7 +49,7 @@ public class GobanTestScript : MonoBehaviour
                     errorOutput.Append("\n[" + ++lineCount + "]: " + e.Data);
                 }
             });
-            
+
 
             process.Start();
 
@@ -58,8 +60,7 @@ public class GobanTestScript : MonoBehaviour
 
             using (StreamWriter myStreamWriter = process.StandardInput)
             {
-                myStreamWriter.AutoFlush = true;
-                myStreamWriter.WriteLine("list_commands");
+                myStreamWriter.WriteLine("genmove B");
             }
 
             process.WaitForExit();
@@ -69,5 +70,10 @@ public class GobanTestScript : MonoBehaviour
         }
 
 
+    }
+
+    public void GenMove()
+    {
+        StartKatagoProcess();
     }
 }
