@@ -49,7 +49,7 @@ public class GobanTestScript : MonoBehaviour
                     errorOutput.Append("\n[" + lineCount + "]: " + e.Data);
                 }
             });
-            
+
             process.Start();
             process.WaitForExit(); //matters where this is placed for proper execution
 
@@ -66,7 +66,7 @@ public class GobanTestScript : MonoBehaviour
             UnityEngine.Debug.Log(output);
             UnityEngine.Debug.Log(errorOutput);
             //process.StandardInput.WriteLine("gtp - model g170-b30c320x2-s4824661760-d1229536699.bin.gz");
-            
+
 
         }
 
