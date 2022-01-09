@@ -12,7 +12,6 @@ public class GobanTestScript : MonoBehaviour
 
     public Text coordinateText;
     private static int lineCount = 0;
-    private static StringBuilder output = new StringBuilder();
     private static StringBuilder errorOutput = new StringBuilder();
     public Process process;
 
@@ -27,6 +26,7 @@ public class GobanTestScript : MonoBehaviour
             startInfo.RedirectStandardOutput = true;
             startInfo.RedirectStandardInput = true;
             startInfo.RedirectStandardError = true;
+            // startInfo.CreateNoWindow = true;
 
             process.StartInfo = startInfo;
 
@@ -35,8 +35,7 @@ public class GobanTestScript : MonoBehaviour
                 // Prepend line numbers to each line of the output.
                 if (!String.IsNullOrEmpty(e.Data))
                 {
-                    lineCount++;
-                    output.Append("\n[" + lineCount + "]: " + e.Data);
+                    UnityEngine.Debug.Log("\n[" + ++lineCount + "]: " + e.Data);
                 }
             });
 
@@ -45,28 +44,27 @@ public class GobanTestScript : MonoBehaviour
                 // Prepend line numbers to each line of the output.
                 if (!String.IsNullOrEmpty(e.Data))
                 {
-                    lineCount++;
-                    errorOutput.Append("\n[" + lineCount + "]: " + e.Data);
+                    errorOutput.Append("\n[" + ++lineCount + "]: " + e.Data);
                 }
             });
+            
 
             process.Start();
-            process.WaitForExit(); //matters where this is placed for proper execution
-
 
             // Asynchronously read the standard output/Error of the spawned process.
             // This raises OutputDataReceived events for each line of output.
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
 
-            //StreamWriter sw = process.StandardInput;
-            //sw.WriteLine($"gtp -model {Application.dataPath}/katago/b20.bin.gz");
-            //sw.WriteLine("genmove B");
+            using (StreamWriter myStreamWriter = process.StandardInput)
+            {
+                myStreamWriter.AutoFlush = true;
+                myStreamWriter.WriteLine("list_commands");
+            }
 
-            UnityEngine.Debug.Log(output);
+            process.WaitForExit();
+            //Output any error and stdout
             UnityEngine.Debug.Log(errorOutput);
-            //process.StandardInput.WriteLine("gtp - model g170-b30c320x2-s4824661760-d1229536699.bin.gz");
-
 
         }
 
