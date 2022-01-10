@@ -59,3 +59,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+/Assets/katago/gtp_logs
+/Assets/katago/KataGoData/opencltuning
